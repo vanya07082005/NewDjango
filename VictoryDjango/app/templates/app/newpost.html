@@ -1,0 +1,41 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+<style>
+    /* Для всех текстовых полей */
+    textarea, input[type="text"] {
+        width: 100%;
+        max-width: 950px;
+        height: 100px;
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        resize: vertical; /* Разрешить изменение размера только по вертикали */
+    }
+
+    /* Только для текстовых областей (textarea) */
+   
+
+    /* Только для обычных текстовых полей */
+    input[type="text"] {
+        height: 40px;
+        width: 100%;
+        max-width: 950px;
+    }
+    h2 {
+        background: linear-gradient( to right, rgb(50, 152, 211),rgb(218, 241, 243));
+        color:white;
+        padding:10px;
+    }
+</style>
+<h2>Добавить товар</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div>
+        {{blogform.as_p}}
+    </div>
+    <button type="submit" class="save btn btn-default"> Сохранить товар </button>
+</form>
+
+{% endblock %}

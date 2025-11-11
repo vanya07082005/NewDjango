@@ -1,0 +1,111 @@
+<!-- Создайте файл app/templates/app/order.html -->
+{% extends "app/layout.html" %}
+
+{% block content %}
+<style>
+    .alert-success {
+        background-color: #d4edda;
+        border: 1px solid #c3e6cb;
+        color: #155724;
+        padding: 15px;
+        border-radius: 5px;
+        margin: 20px 0;
+        position: relative;
+    }
+
+    .alert-dismissible .close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 0.75rem 1.25rem;
+        color: inherit;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
+    textarea, input[type="text"], input[type="tel"], input[type="number"] {
+        width: 100%;
+        max-width: 950px;
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        resize: vertical;
+    }
+
+    textarea {
+        height: 100px;
+    }
+
+    input[type="text"], input[type="tel"], input[type="number"] {
+        height: 40px;
+    }
+
+    h2 {
+        background: linear-gradient(to right, rgb(50, 152, 211), rgb(218, 241, 243));
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .order-info {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        border-left: 4px solid #007bff;
+    }
+
+    .product-details {
+        background: linear-gradient(to right, #e3f2fd, #f3e5f5);
+        padding: 15px;
+        border-radius: 5px;
+        margin: 15px 0;
+    }
+
+    .alert-success {
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+        color: #155724;
+        padding: 15px;
+        border-radius: 5px;
+        margin: 20px 0;
+    }
+</style>
+
+<h2>Оформление заказа</h2>
+
+<div class="order-info">
+    <h3>Информация о заказе</h3>
+    <div class="product-details">
+        <h4>Товар: {{ product.title }}</h4>
+        <p><strong>Цена:</strong> {{ product.price }} руб.</p>
+        <p><strong>Описание:</strong> {{ product.description }}</p>
+    </div>
+</div>
+
+<form method="POST">
+    {% csrf_token %}
+    <div>
+        {{ form.as_p }}
+    </div>
+
+    <div style="margin: 20px 0; padding: 15px; background-color: #fff3cd; border-radius: 5px;">
+        <h4>💡 Важная информация:</h4>
+        <p>• Оплата производится наличными при получении товара</p>
+        <p>• Доставка осуществляется курьером</p>
+        <p>• После оформления заказа с вами свяжутся для уточнения деталей</p>
+    </div>
+
+    <button type="submit" class="save btn btn-default" style="background-color: #28a745; color: white; padding: 10px 20px;">
+        Оформить заказ
+    </button>
+    <a href="{% url 'blogpost' parametr=product.id %}" class="btn btn-default" style="margin-left: 10px;">
+        Вернуться к товару
+    </a>
+</form>
+
+
+{% endblock %}

@@ -1,0 +1,338 @@
+﻿{% extends "app/layout.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+    .about-hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 80px 0;
+        text-align: center;
+        margin-bottom: 60px;
+        border-radius: 0 0 20px 20px;
+    }
+
+        .about-hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: bold;
+        }
+
+        .about-hero p {
+            font-size: 1.3em;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+    .section {
+        padding: 60px 0;
+        border-bottom: 1px solid #eaeaea;
+    }
+
+        .section:nth-child(even) {
+            background: linear-gradient(to right, #f8f9fa, #e9ecef);
+        }
+
+    .section-title {
+        text-align: center;
+        margin-bottom: 50px;
+        color: #333;
+        font-size: 2.5em;
+        font-weight: 300;
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+    }
+
+    .feature-card {
+        background: white;
+        padding: 40px 30px;
+        border-radius: 15px;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 1px solid #eaeaea;
+    }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+    .feature-icon {
+        font-size: 3em;
+        margin-bottom: 20px;
+        color: #667eea;
+    }
+
+    .feature-card h3 {
+        color: #333;
+        margin-bottom: 15px;
+        font-size: 1.5em;
+    }
+
+    .feature-card p {
+        color: #666;
+        line-height: 1.6;
+    }
+
+    .stats-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+    }
+
+    .stat-item {
+        text-align: center;
+        padding: 30px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .stat-number {
+        font-size: 3em;
+        font-weight: bold;
+        color: #667eea;
+        margin-bottom: 10px;
+    }
+
+    .stat-label {
+        color: #666;
+        font-size: 1.1em;
+    }
+
+    .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+    }
+
+    .team-member {
+        text-align: center;
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .member-photo {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        margin: 0 auto 20px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 2em;
+        font-weight: bold;
+    }
+
+    .values-list {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .value-item {
+        background: white;
+        padding: 25px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        border-left: 5px solid #667eea;
+    }
+
+        .value-item h4 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+    .cta-section {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 80px 0;
+        text-align: center;
+        border-radius: 20px;
+        margin-top: 40px;
+    }
+
+    .cta-button {
+        display: inline-block;
+        background: white;
+        color: #667eea;
+        padding: 15px 40px;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 1.2em;
+        margin-top: 20px;
+        transition: transform 0.3s ease;
+    }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            color: #667eea;
+            text-decoration: none;
+        }
+</style>
+
+<!-- Герой секция -->
+<div class="about-hero">
+    <div class="container">
+        <h1>GadgetFlow</h1>
+        <p>Добро пожаловать в лучший интернет-магазин электроники! Мы создаем будущее технологий, доступное каждому.</p>
+    </div>
+</div>
+
+<!-- О компании -->
+<div class="section">
+    <div class="container">
+        <h2 class="section-title">Наша Миссия</h2>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-center">
+                <p style="font-size: 1.2em; line-height: 1.8; color: #555;">
+                    Мы верим, что современные технологии должны быть доступны каждому. GadgetFlow был создан с целью сделать
+                    передовую электронику простой в использовании и доступной по цене. От смартфонов до мощных игровых ПК -
+                    мы тщательно отбираем каждый продукт, чтобы предложить вам только лучшее.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Преимущества -->
+<div class="section">
+    <div class="container">
+        <h2 class="section-title">Почему Выбирают Нас</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🚚</div>
+                <h3>Быстрая Доставка</h3>
+                <p>Доставляем заказы по всей России за 1-3 дня. Бесплатная доставка при заказе от 10,000 рублей.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Гарантия Качества</h3>
+                <p>Все товары проходят тщательную проверку и имеют официальную гарантию производителя.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3>Поддержка 24/7</h3>
+                <p>Наша служба поддержки всегда готова помочь с выбором и ответить на ваши вопросы.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3>Оплата при Получении</h3>
+                <p>Оплачивайте заказы наличными при получении. Никаких предоплат - вы платите только когда держите товар в руках.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">↩️</div>
+                <h3>Легкий Возврат</h3>
+                <p>Простая процедура возврата в течение 14 дней без лишних вопросов и сложных формальностей.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>Удобный Интерфейс</h3>
+                <p>Интуитивно понятный сайт с быстрым поиском, фильтрами и подробными описаниями товаров.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Статистика -->
+<div class="section">
+    <div class="container">
+        <h2 class="section-title">GadgetFlow в Цифрах</h2>
+        <div class="stats-container">
+            <div class="stat-item">
+                <div class="stat-number">50,000+</div>
+                <div class="stat-label">Довольных клиентов</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">1,200+</div>
+                <div class="stat-label">Товаров в каталоге</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">5 лет</div>
+                <div class="stat-label">На рынке</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">98%</div>
+                <div class="stat-label">Положительных отзывов</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Категории товаров -->
+<div class="section">
+    <div class="container">
+        <h2 class="section-title">Наши Основные Направления</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3>Смартфоны</h3>
+                <p>От бюджетных моделей до флагманов от ведущих производителей: Apple, Samsung, Xiaomi и других.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💻</div>
+                <h3>Ноутбуки</h3>
+                <p>Игровые, рабочие, ультрабуки - подберем идеальный ноутбук для ваших задач.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🖥️</div>
+                <h3>Компьютеры и ПК</h3>
+                <p>Готовые сборки и компоненты для создания мощной рабочей станции или игрового ПК.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Ценности компании -->
+<div class="section">
+    <div class="container">
+        <h2 class="section-title">Наши Ценности</h2>
+        <div class="values-list">
+            <div class="value-item">
+                <h4>💡 Инновации</h4>
+                <p>Мы постоянно следим за технологическими трендами и первыми предлагаем новинки рынка.</p>
+            </div>
+            <div class="value-item">
+                <h4>🤝 Честность</h4>
+                <p>Прозрачные условия, честные цены и открытая коммуникация с клиентами.</p>
+            </div>
+            <div class="value-item">
+                <h4>⭐ Качество</h4>
+                <p>Только проверенная техника от официальных поставщиков с полным пакетом документов.</p>
+            </div>
+            <div class="value-item">
+                <h4>❤️ Забота о клиенте</h4>
+                <p>Мы не просто продаем технику - мы помогаем подобрать оптимальное решение для ваших нужд.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Призыв к действию -->
+<div class="cta-section">
+    <div class="container">
+        <h2 style="margin-bottom: 20px;">Готовы Найти Идеальную Технику?</h2>
+        <p style="font-size: 1.2em; margin-bottom: 30px;">
+            Исследуйте наш каталог и откройте для себя мир современных технологий
+        </p>
+        <a href="{% url 'blog' %}" class="cta-button">Перейти к Каталогу</a>
+    </div>
+</div>
+
+{% endblock %}

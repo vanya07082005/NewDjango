@@ -1,0 +1,149 @@
+{% extends "app/layout.html" %}
+{% load static %}
+{% block content %}
+<style>
+    h1 {
+        background-color: rgb(120, 166, 177);
+        color: white;
+        text-shadow: 3px 3px 1px rgb(0, 0, 0);
+        margin: 20px 0px;
+        padding: 3px 10px;
+    }
+
+    .sup {
+        background: linear-gradient(to right,rgb(163 227 237),rgb(138, 234, 178),rgb(231, 224, 237));
+        margin: 10px 0px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        width: 100%;
+        padding: 10px 15px 10px 15px;
+    }
+
+        .sup img {
+            width: 200px;
+            height: 180px;
+            margin: 10px 30px 10px 0px;
+            border: 5px solid rgb(163, 168, 255);
+            padding: 10px;
+            border-radius: 10px;
+            object-fit: contain;
+            background-color: #ffffff;
+        }
+
+            .sup img:hover {
+                box-shadow: 5px 15px 35px rgb(163, 168, 255);
+                transform: translateY(10px);
+                transition: 0.1s;
+            }
+
+    /* Стили для поиска */
+    .search-container {
+        margin: 20px 0;
+        padding: 15px;
+        background: linear-gradient(to right, #e3f2fd, #f3e5f5);
+        border-radius: 10px;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .search-input {
+        flex: 1;
+        padding: 10px 15px;
+        border: 2px solid rgb(120, 166, 177);
+        border-radius: 25px;
+        font-size: 16px;
+        outline: none;
+    }
+
+        .search-input:focus {
+            box-shadow: 0 0 10px rgba(120, 166, 177, 0.5);
+        }
+
+    .search-btn {
+        background-color: rgb(120, 166, 177);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+        .search-btn:hover {
+            background-color: rgb(100, 146, 157);
+            transform: translateY(-2px);
+            transition: 0.2s;
+        }
+
+    .search-results {
+        margin: 10px 0;
+        padding: 10px;
+        background: linear-gradient(to right, #a1c0d7, #e5c4ea);
+        border-radius: 5px;
+        border-left: 4px solid #25a6ca;
+    }
+</style>
+
+<h1>{{ title }}</h1>
+
+<!-- Форма поиска -->
+<div class="search-container">
+    <form method="get" action="{% url 'blog' %}" style="display: flex; width: 100%; gap: 10px;">
+        <input type="text"
+               name="search"
+               class="search-input"
+               placeholder="Поиск товаров по названию..."
+               value="{{ search_query }}"
+               autocomplete="off">
+        <button type="submit" class="search-btn">
+            🔍 Поиск
+        </button>
+    </form>
+
+</div>
+
+<!-- Результаты поиска -->
+{% if search_query %}
+<div class="search-results">
+    <strong>Результаты поиска для: "{{ search_query }}"</strong>
+    <p>Найдено товаров: {{ posts|length }}</p>
+    {% if posts|length == 0 %}
+    <p>😔 Товары по вашему запросу не найдены</p>
+    {% endif %}
+</div>
+{% endif %}
+
+<!-- Список товаров -->
+{% for post in posts %}
+<div class="sup">
+    <a href="{% url 'blogpost' parametr=post.id %}">
+        <img src="{{ post.image.url }}" alt="Картинка товара" />
+    </a>
+    <div>
+        <h2>{{ post.title }}</h2>
+        <h6><i>Товар выведен на рынок {{ post.posted }}</i></h6>
+        <p>{{ post.description }}</p>
+        <p><b style="background-color:rgb(175, 245, 209)">{{ post.price }} руб</b></p>
+        <p><a href="{% url 'blogpost' parametr=post.id %}">Подробнее о товаре</a></p>
+    </div>
+</div>
+{% empty %}
+<!-- Сообщение если товаров нет -->
+<div style="text-align: center; padding: 40px; background-color: #f8f9fa; border-radius: 10px;">
+    <h3>😔 Товары не найдены</h3>
+    <p>Попробуйте изменить поисковый запрос или <a href="{% url 'blog' %}">посмотреть все товары</a></p>
+</div>
+{% endfor %}
+
+<!-- Кнопка "Показать все" если есть поисковый запрос -->
+{% if search_query and posts|length > 0 %}
+<div style="text-align: center; margin: 20px 0;">
+    <a href="{% url 'blog' %}" class="btn btn-default" style="padding: 10px 20px;">
+        Показать все товары
+    </a>
+</div>
+{% endif %}
+
+{% endblock %}

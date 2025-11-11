@@ -1,0 +1,281 @@
+﻿{% extends "app/layout.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+    .contacts-hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 80px 0;
+        text-align: center;
+        margin-bottom: 60px;
+        border-radius: 0 0 20px 20px;
+    }
+
+        .contacts-hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: bold;
+        }
+
+        .contacts-hero p {
+            font-size: 1.3em;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+    .contacts-container {
+        display: flex;
+        justify-content:center;
+        gap: 40px;
+        margin-bottom: 60px;
+    }
+
+    .contact-card {
+        width:350px;
+        background: white;
+        padding: 40px 30px;
+        border-radius: 20px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 1px solid #f0f0f0;
+        position: relative;
+        overflow: hidden;
+    }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(to right, #667eea, #764ba2);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+
+    .contact-icon {
+        font-size: 3em;
+        margin-bottom: 25px;
+        display: block;
+        color: #667eea;
+    }
+
+    .contact-card h3 {
+        color: #333;
+        margin-bottom: 20px;
+        font-size: 1.8em;
+        font-weight: 600;
+    }
+
+    .contact-info {
+        color: #666;
+        line-height: 1.8;
+        font-size: 1.1em;
+    }
+
+        .contact-info a {
+            color: #667eea;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+            .contact-info a:hover {
+                color: #764ba2;
+                text-decoration: underline;
+            }
+
+    .map-section {
+        background: linear-gradient(to right, #f8f9fa, #e9ecef);
+        padding: 60px 0;
+        border-radius: 20px;
+        margin-bottom: 60px;
+    }
+
+    .map-container {
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+
+    .map-placeholder {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        padding: 80px 40px;
+        border-radius: 15px;
+        margin-top: 30px;
+    }
+
+        .map-placeholder h4 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+    .working-hours {
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        text-align: center;
+        margin-bottom: 60px;
+    }
+
+    .hours-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 30px;
+        margin-top: 30px;
+    }
+
+    .hour-item {
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 10px;
+        border-left: 4px solid #667eea;
+    }
+
+    .day {
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 5px;
+    }
+
+    .time {
+        color: #667eea;
+        font-size: 1.1em;
+    }
+
+    .support-section {
+        text-align: center;
+        padding: 60px 0;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 20px;
+    }
+
+    .support-btn {
+        display: inline-block;
+        background: white;
+        color: #667eea;
+        padding: 15px 40px;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 1.2em;
+        margin-top: 20px;
+        transition: transform 0.3s ease;
+    }
+
+        .support-btn:hover {
+            transform: scale(1.05);
+            color: #667eea;
+            text-decoration: none;
+        }
+
+    @media (max-width: 768px) {
+        .contacts-hero h1 {
+            font-size: 2.5em;
+        }
+
+        .contacts-hero p {
+            font-size: 1.1em;
+        }
+
+        .contact-card {
+            padding: 30px 20px;
+        }
+    }
+</style>
+
+<!-- Герой секция -->
+<div class="contacts-hero">
+    <div class="container">
+        <h1>Контакты</h1>
+        <p>Свяжитесь с нами любым удобным способом. Мы всегда рады помочь!</p>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Основные контакты -->
+    <div class="contacts-container">
+        <div class="contact-card">
+            <div class="contact-icon">📍</div>
+            <h3>Наш Адрес</h3>
+            <div class="contact-info">
+                <p><strong>г. Чебоксары</strong></p>
+                <p>ул. Ленинского Комсомола, 21а </p>
+                <p>ТРЦ «Мадагаскар», 1 этаж</p>
+                <p>428027</p>
+            </div>
+        </div>
+
+        <div class="contact-card">
+            <div class="contact-icon">📞</div>
+            <h3>Телефоны</h3>
+            <div class="contact-info">
+                <p><strong>Основной:</strong></p>
+                <p>+7 (9003) 32-58-95</p>
+                <p><strong>Техподдержка:</strong></p>
+                <p>+7 (8352) 12-34-57</p>
+            </div>
+        </div>
+
+        <div class="contact-card">
+            <div class="contact-icon">✉️</div>
+            <h3>Электронная Почта</h3>
+            <div class="contact-info">
+                <p><strong>Общие вопросы:</strong></p>
+                <p><a href="mailto:info@gadgetflow.ru">info@gadgetflow.ru</a></p>
+                <p><strong>Техподдержка:</strong></p>
+                <p><a href="mailto:support@gadgetflow.ru">support@gadgetflow.ru</a></p>
+                <p><strong>Сотрудничество:</strong></p>
+                <p><a href="mailto:partners@gadgetflow.ru">partners@gadgetflow.ru</a></p>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <!-- Время работы -->
+    <div class="working-hours">
+        <h3 style="color: #333; margin-bottom: 30px; font-size: 2em;">Время Работы</h3>
+        <div class="hours-grid">
+            <div class="hour-item">
+                <div class="day">Понедельник - Пятница</div>
+                <div class="time">09:00 - 21:00</div>
+            </div>
+            <div class="hour-item">
+                <div class="day">Суббота</div>
+                <div class="time">10:00 - 20:00</div>
+            </div>
+            <div class="hour-item">
+                <div class="day">Воскресенье</div>
+                <div class="time">10:00 - 18:00</div>
+            </div>
+            <div class="hour-item">
+                <div class="day">Онлайн-поддержка</div>
+                <div class="time">Круглосуточно</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Поддержка -->
+    <div class="support-section">
+        <h3 style="margin-bottom: 20px;">Нужна Помощь с Выбором?</h3>
+        <p style="font-size: 1.2em; margin-bottom: 30px;">
+            Наши консультанты помогут подобрать идеальную технику для ваших нужд
+        </p>
+        <a href="tel:+78352123456" class="support-btn">Позвонить Сейчас</a>
+    </div>
+</div>
+
+{% endblock %}

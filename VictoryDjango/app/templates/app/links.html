@@ -1,0 +1,14 @@
+﻿{% extends "app/layout.html" %}
+{% load static %}
+
+{% block content %}
+<h2>{{title}}</h2>
+<p>{{message}}</p>
+<ul>
+    <li><a href="https://www.python.org/" target="_blank"> <img src="{% static 'app/content/python.png' %}" alt="Logo 1" title="python" /></a></li>
+    <li><a href="https://webref.ru/layout/bootstrap" target="_blank"> <img src="{% static 'app/content/bootstrap.png' %}" alt="Logo 2" title="bootstrap" /></a></li>
+    <li><a href="https://www.djangoproject.com/" target="_blank"> <img src="{% static 'app/content/django.png' %}" alt="Logo 3" title="django"/></a></li>
+</ul>
+
+
+{% endblock  %}

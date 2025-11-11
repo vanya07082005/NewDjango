@@ -1,0 +1,122 @@
+{% extends "app/layout.html" %}
+{% block content %}
+<style>
+    textarea {
+        width: 100%;
+        max-width: 100vw;
+        height: 100px;
+        padding: 20px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        resize: vertical; /* Разрешить изменение размера только по вертикали */
+    }
+
+    .block1 {
+        background-color: rgb(184 235 242);
+        padding: 4px 10px;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+    }
+
+        .block1 p {
+            background: rgb(248, 248, 248);
+            border: 1px dashed rgb(143 203 211);
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+    .header {
+        font-size: large;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    img {
+        margin: 10px 30px 10px 0px; /* Отступы вокруг картинки */
+        border: 2px solid rgb(184 235 242);
+        border-radius: 10px;
+        padding: 10px;
+        box-shadow: 1px 1px 20px rgb(143 203 211);
+        background-color: white;
+    }
+
+    .contain {
+        border: 1px solid #ccc;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        background: linear-gradient(to right,#c0d4dd,#c1ebeb);
+        width: 100%;
+        margin: 15px 0; /* вертикальные отступы 15px, горизонтальные 0 */
+        padding: 20px 15px; /* внутренние отступы 20px сверху/снизу, 15px слева/справа */
+        border-radius: 10px;
+    }
+
+    h2 {
+        margin: 10px;
+        padding: 5px 0px;
+        text-shadow: 1px 1px 1px #373371;
+    }
+
+    .contain p {
+        margin: 12px 20px 10px 10px;
+    }
+</style>
+
+<h2> {{post_1.title}} </h2>
+<div class="contain">
+    {% if post_1.image and post_1.image.url != '/media/temp.jpg' %}
+    <img src="{{ post_1.image.url }}" alt="Картинка товара" width="300" />
+    {% endif %}
+    <p>{{post_1.content|linebreaksbr}} </p> {# вывод текста по абзацам#}
+</div>
+
+
+<!-- Добавьте в blogpost.html перед кнопкой "Назад" -->
+
+
+<hr />
+<div style="text-align: left; margin: 20px 0;">
+    <a href="{% url 'order_create' product_id=post_1.id %}"
+       class="btn btn-success"  
+       style="padding: 10px 50px 10px 10px; font-size: 16px; font-weight: bold; border-radius: 5px;">
+        🛒 Оформить заказ
+    </a>
+</div>
+
+
+{% if user.is_authenticated %}
+<form method="POST">
+    {% csrf_token %} {# защита от атак CSRF#}
+    <div>
+        <!-- Выводим метку и поле отдельно -->
+        <p>
+            <label for="{{ form.text.id_for_label }}">{{ form.text.label }}:</label>
+        </p>
+        <p>
+            {{ form.text }}
+        </p>
+        <button type="submit" class="save btn btn-default" style=" border-radius: 5px;">Отправить комментарий</button>
+    </div>
+</form>
+{% else %}
+<h3> Для добавления своего комментария, пожалуйста, авторизуйтесь </h3>
+{% endif %}
+
+<hr />
+<hr />
+{% for comment in comments %}
+<div class="block1">
+    <div class="header"> <b>&nbsp;&nbsp;&nbsp;&#128100; {{comment.author}}</b> <i>{{comment.date}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i> </div>
+    <p> {{comment.text|linebreaksbr}} </p>
+    <hr />
+</div>
+{% endfor %}
+
+<p><a href="{% url 'blog' %}">Назад</a></p>
+
+{% endblock %}
+
+

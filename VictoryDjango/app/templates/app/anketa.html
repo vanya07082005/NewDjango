@@ -1,0 +1,214 @@
+﻿{% extends "app/layout.html" %}
+{% load static %}
+{% block content %}
+
+<style>
+    .anketa-container {
+        max-width: 1000px;
+        margin: 30px auto;
+        padding: 0 20px;
+    }
+
+    .anketa-card {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        border: 1px solid #f0f0f0;
+    }
+
+    .anketa-title {
+        font-size: 2em;
+        margin-bottom: 20px;
+        color: #333;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 600;
+        color: #333;
+    }
+
+    .form-input, .form-select, .form-textarea {
+        width: 100%;
+        padding: 10px;
+        border: 2px solid #e1e5e9;
+        border-radius: 8px;
+        font-size: 1em;
+        background: #f8f9fa;
+        box-sizing: border-box;
+    }
+
+    .form-textarea {
+        height: 100px;
+        resize: vertical;
+    }
+
+    .radio-group {
+        display: flex;
+        gap: 15px;
+        margin-top: 5px;
+    }
+
+    .checkbox-group {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .submit-btn {
+        width: 100%;
+        background: #667eea;
+        color: white;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        font-size: 1em;
+        font-weight: 600;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+        .submit-btn:hover {
+            background: #5a6fd8;
+        }
+
+    .success-container {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+
+    .data-list {
+        text-align: left;
+        margin: 20px 0;
+    }
+
+        .data-list li {
+            margin-bottom: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+</style>
+
+<div class="anketa-container">
+    {% if form != None %}
+    <div class="anketa-card">
+        <h2 class="anketa-title">Отзыв о товаре</h2>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label class="form-label">{{ form.name.label }}</label>
+                {{ form.name }}
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">{{ form.city.label }}</label>
+                {{ form.city }}
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">{{ form.age.label }}</label>
+                {{ form.age }}
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">{{ form.gender.label }}</label>
+                <div class="radio-group">
+                    {% for choice in form.gender %}
+                    <div>
+                        {{ choice.tag }}
+                        <label for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">{{ form.product.label }}</label>
+                {{ form.product }}
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">{{ form.budget.label }}</label>
+                {{ form.budget }}
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">{{ form.shop_frequency.label }}</label>
+                {{ form.shop_frequency }}
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">{{ form.rating.label }}</label>
+                {{ form.rating }}
+            </div>
+
+            <div class="form-group">
+                <div class="checkbox-group">
+                    {{ form.notice }}
+                    <label class="form-label">{{ form.notice.label }}</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">{{ form.email.label }}</label>
+                {{ form.email }}
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">{{ form.message.label }}</label>
+                {{ form.message }}
+            </div>
+
+            <button type="submit" class="submit-btn">
+                Отправить
+            </button>
+        </form>
+    </div>
+
+    <script>
+        // Добавляем стили к полям
+        document.querySelectorAll('input[type="text"], input[type="number"], input[type="email"]').forEach(field => {
+            field.className = 'form-input';
+        });
+        document.querySelectorAll('select').forEach(field => {
+            field.className = 'form-select';
+        });
+        document.querySelector('textarea').className = 'form-textarea';
+    </script>
+
+    {% else %}
+    <div class="success-container">
+        <h2>Спасибо за отзыв!</h2>
+        <div class="data-list">
+            <ul>
+                <li><strong>Имя:</strong> {{ data.name }}</li>
+                <li><strong>Город:</strong> {{ data.city }}</li>
+                <li><strong>Возраст:</strong> {{ data.age }} лет</li>
+                <li><strong>Пол:</strong> {{ data.gender }}</li>
+                <li><strong>Товар:</strong> {{ data.product }}</li>
+                <li><strong>Цена:</strong> {{ data.budget }} руб.</li>
+                <li><strong>Частота покупок:</strong> {{ data.shop_frequency }}</li>
+                <li><strong>Оценка:</strong> {{ data.rating }}</li>
+                <li><strong>Получать новости:</strong> {{ data.notice }}</li>
+                <li><strong>Email:</strong> {{ data.email }}</li>
+                <li><strong>Отзыв:</strong> {{ data.message }}</li>
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}

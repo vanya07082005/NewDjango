@@ -91,7 +91,6 @@
 <form method="POST">
     {% csrf_token %} {# защита от атак CSRF#}
     <div>
-        <!-- Выводим метку и поле отдельно -->
         <p>
             <label for="{{ form.text.id_for_label }}">{{ form.text.label }}:</label>
         </p>
@@ -116,6 +115,7 @@
 {% endfor %}
 
 <p><a href="{% url 'blog' %}">Назад</a></p>
+
 
 {% endblock %}
 
